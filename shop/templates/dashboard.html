@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T-Board</title>
+</head>
+<body>
+
+    <h1>This is my Task Board</h1>
+    <p>Loged in as: <strong>{{username}}</strong></p>
+
+    <a href="{% url 'logout'%}" style="color:red;">Logout</a>
+
+    <hr>
+
+    <form method="post">
+        {% csrf_token %}
+        
+        <label for="task">Task</label>
+        <input type="text" name="task" id="task" required>
+
+        <label for="assigned_to">Assigned To</label>
+        <input type="text" name="assigned_to" id="assigned_to">
+
+        
+        <button type="submit">assign</button>
+
+      
+    </form>
+
+    <table border="2">
+        <thead>
+            <th>id</th>
+            <th>task</th>
+            <th>assigned to</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </thead>
+
+        {% for task in tasks %}
+        <tbody>
+            <td>{{ task.id }}</td>
+            <td>{{ task.task }}</td>
+            <td>{{ task.assigned_to }}</td>
+            <td><a href="{% url 'update_task' task.id %}">Update</a></td>
+            <!-- Note: The URL for the update task should match the name defined in urls.py -->
+            <td><a href="{% url 'delete_task' task.id %}" onclick="return confirm('Are you sure');" style="color: red;">Delete</a></td>
+        </tbody>
+        {% endfor %}
+    </table>
+
+</body>
+</html>
+

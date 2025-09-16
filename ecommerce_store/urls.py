@@ -16,14 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.shortcuts import redirect
 from django.conf import settings
 from django.conf.urls.static import static
 
 
 urlpatterns = [
+    path("", lambda request: redirect("login")),   # default → login page
     path('admin/', admin.site.urls),
-    path('', include('accounts.urls')),            
-    path('', include('shop.urls')),
+    path('accounts/', include('accounts.urls')),            
+    path('shop/', include('shop.urls')),
 ]
 
 if settings.DEBUG:

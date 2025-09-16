@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {% extends "base.html" %}
+    {% block content %}
+    <h1>Checkout</h1>
+    <p>Order Total: ₹ {{ cart.total_price }}</p>
+    <p>This is a placeholder. In Week 3 we'll create an Order and integrate Razorpay.</p>
+    <form method="post">{% csrf_token %}
+        <button type="submit">Proceed to Payment (placeholder)</button>
+    </form>
+    {% endblock %}
+
+</body>
+
+</html>

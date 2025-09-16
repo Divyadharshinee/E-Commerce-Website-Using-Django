@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {% extends "base.html" %}
+    {% block content %}
+    <h1>{{ product.name }}</h1>
+    {% if product.image %}
+    <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width:400px;">
+    {% endif %}
+    <p>{{ product.description }}</p>
+    <p>Price: ₹ {{ product.price }}</p>
+    <p>Stock: {{ product.stock }}</p>
+    <form action="{% url 'add_to_cart' product.pk %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Add to cart</button>
+    </form>
+    <a href="{% url 'shop_home' %}">Back to products</a>
+    {% endblock %}
+
+</body>
+
+</html>
